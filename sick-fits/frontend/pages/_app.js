@@ -1,11 +1,20 @@
-import Page from "../components/Page";
+/* eslint-disable react/prop-types */
+import Page from '../components/Page';
+import Router from 'next/router';
+import nProgress from 'nprogress';
 
-const MyApp = ({Component, pageProps}) => {
+import '../components/styles/nprogress.css';
 
-return <Page>
-    <Component {...pageProps} />
-</Page>
+Router.events.on('routeChangeStart', () => nProgress.start());
+Router.events.on('routeChangeComplete', () => nProgress.done());
+Router.events.on('routeChangeError', () => nProgress.done());
 
-}
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <Page>
+      <Component {...pageProps} />
+    </Page>
+  );
+};
 
 export default MyApp;
