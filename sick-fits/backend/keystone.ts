@@ -5,6 +5,7 @@ import { createAuth } from '@keystone-next/auth';
 
 import { statelessSessions, withItemData, } from '@keystone-next/keystone/session'
 import { Product } from './schemas/Product';
+import { ProductImage } from './schemas/ProductImage';
 
 const databaseUrl =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -39,18 +40,18 @@ export default withAuth(
     },
     lists: createSchema({
       User,
-      Product
+      Product,
+      ProductImage
     }),
     ui: {
       // TODO change this for roles
-      isAccessAllowed: ({ session }) => {
-        console.log(session)
-        return !!session?.data;
-      },
+      isAccessAllowed: ({ session }) => !!session?.data,
     },
 
     session: withItemData(statelessSessions(sessionConfig), {
       // GraphQL Query
       User: `id name email`,
-    })
+    }),
+
+
   }));
