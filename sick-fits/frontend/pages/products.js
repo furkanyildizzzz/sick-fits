@@ -1,7 +1,7 @@
 const ProductPage = () => {
   return (
     <div>
-      <p>Hello !</p>
+      <p>Products !</p>
     </div>
   );
 };

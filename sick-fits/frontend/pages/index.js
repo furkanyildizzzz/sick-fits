@@ -1,5 +1,1 @@
-const IndexPage = () => {
-  return <p>Hello !</p>;
-};
-
-export default IndexPage;
+export { default } from './products';
