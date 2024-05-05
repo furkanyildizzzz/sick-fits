@@ -1,11 +1,14 @@
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
+import { createAuth } from '@keystone-next/auth';
+import {
+  statelessSessions,
+  withItemData,
+} from '@keystone-next/keystone/session';
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
-import { createAuth } from '@keystone-next/auth';
 
-import { statelessSessions, withItemData, } from '@keystone-next/keystone/session'
 import { insertSeedData } from './seed-data';
 
 const databaseUrl =
@@ -21,10 +24,9 @@ const { withAuth } = createAuth({
   identityField: 'email',
   secretField: 'password',
   initFirstItem: {
-    fields: ['name', 'email', 'password']
-  }
-})
-
+    fields: ['name', 'email', 'password'],
+  },
+});
 
 export default withAuth(
   config({
@@ -38,26 +40,26 @@ export default withAuth(
       adapter: 'mongoose',
       url: databaseUrl,
       onConnect: async (keystone) => {
-        console.log('Connected to Database')
+        console.log('Connected to Database');
         if (process.argv.includes('--seed-data')) {
           await insertSeedData(keystone);
         }
-      }
+      },
     },
     lists: createSchema({
       User,
       Product,
-      ProductImage
+      ProductImage,
     }),
     ui: {
       // TODO change this for roles
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       isAccessAllowed: ({ session }) => !!session?.data,
     },
 
     session: withItemData(statelessSessions(sessionConfig), {
       // GraphQL Query
-      User: `id name email`,
+      User: 'id name email',
     }),
-
-
-  }));
+  })
+);
