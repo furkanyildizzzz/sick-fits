@@ -1,7 +1,7 @@
+import CreateProduct from '../components/CreateProduct';
+
 const SellPage = () => {
-    return <div>
-        <p>Hello !</p>
-    </div>
+  return <CreateProduct />;
 };
 
 export default SellPage;
