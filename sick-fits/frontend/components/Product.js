@@ -17,6 +17,11 @@ const Product = ({ product }) => {
       <PriceTagStyles>{formatMoney(product.price)}</PriceTagStyles>
       <p>{product.description}</p>
       {/*TODO Add buttons to delete and add items*/}
+      <div className="buttonList">
+        <Link href={{ pathname: '/update', query: { id: product.id } }}>
+          <button type="button">Edit</button>
+        </Link>
+      </div>
     </ItemStyles>
   );
 };
