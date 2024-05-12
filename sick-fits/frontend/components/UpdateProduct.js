@@ -28,12 +28,13 @@ const UPDATE_PRODUCT_MUTATION = gql`
 
 const UpdateProduct = ({ id }) => {
   const { data, loading, error } = useQuery(SINGLE_PRODUCT_QUERY, { variables: { id: id } });
-  const [updateProduct, { data: updateDate, loading: updateLoading, error: updateError }] =
+  const [updateProduct, { data: updateData, loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_PRODUCT_MUTATION);
+
+  const { inputs, handleChange } = useForm(data?.Product);
 
   if (loading || updateLoading) return <p>Loading</p>;
   if (error || updateError) return <DisplayError error={error ?? updateError} />;
-  const { inputs, handleChange } = useForm(data?.Product);
 
   return (
     <FormStyles
