@@ -6,7 +6,7 @@ import { perPage } from '../config';
 import DisplayError from './ErrorMessage';
 import Head from 'next/head';
 
-const ALL_PRODUCTS_COUNT_QUERY = gql`
+export const ALL_PRODUCTS_COUNT_QUERY = gql`
   query {
     _allProductsMeta {
       count
