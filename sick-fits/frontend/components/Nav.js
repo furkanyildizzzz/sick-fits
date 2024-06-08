@@ -1,17 +1,20 @@
 import Link from 'next/link';
 import NavStyles from './styles/NavStyles';
 import useUser from '../lib/useUser';
+import SignOut from './SignOut';
 
 const Nav = () => {
   const user = useUser();
+
   return (
     <NavStyles>
       <Link href="/products">Products</Link>
       {user && (
         <>
-          <Link href="/sell">Sell </Link>
+          <Link href="/sell">Sell</Link>
           <Link href="/orders">Orders</Link>
           <Link href="/account">Account</Link>
+          <SignOut />
         </>
       )}
       {!user && (
