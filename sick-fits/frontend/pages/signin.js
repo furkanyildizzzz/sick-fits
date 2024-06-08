@@ -1,9 +1,7 @@
+import SignIn from '../components/SignIn';
+
 const SignInPage = () => {
-  return (
-    <div>
-      <p>Sign In !</p>
-    </div>
-  );
+  return <SignIn />;
 };
 
 export default SignInPage;
