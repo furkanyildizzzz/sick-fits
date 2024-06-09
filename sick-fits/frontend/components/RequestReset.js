@@ -34,7 +34,7 @@ const RequestReset = () => {
       >
         <ErrorMessage error={error} />
         {data?.sendUserPasswordResetLink && <p> Reset link sent to {inputs.email} email address.</p>}
-        <h2>Sign Up</h2>
+        <h2>Request Resend</h2>
         <fieldset>
           <label>
             Email
