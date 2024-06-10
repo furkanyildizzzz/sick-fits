@@ -39,7 +39,7 @@ const Reset = ({ token }) => {
         onSubmit={handleSubmit}
       >
         <ErrorMessage error={mutationError || fetchError} />
-        {data.redeemUserPasswordResetToken === null && <p>Reset Success</p>}
+        {data?.redeemUserPasswordResetToken === null && <p>Reset Success</p>}
         <h2>Reset</h2>
         <fieldset>
           <label>
