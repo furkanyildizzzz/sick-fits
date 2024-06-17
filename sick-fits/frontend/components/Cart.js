@@ -48,6 +48,8 @@ import CartStyles from './styles/CartStyles';
 import Supreme from './styles/Supreme';
 import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
+import { useCart } from '../lib/CartState';
+import CloseButton from './styles/CloseButton';
 
 const CartItemStyles = styled.li`
   padding: 1rem 0;
@@ -88,10 +90,12 @@ const CartItem = ({ cartItem }) => {
 
 const Cart = () => {
   const user = useUser();
+  const { cartOpen, toggleCartOpen } = useCart();
   return (
-    <CartStyles open={true}>
+    <CartStyles open={cartOpen}>
       <header>
         <Supreme>{`${user?.name}'s Carts`}</Supreme>
+        <CloseButton onClick={toggleCartOpen}>&times;</CloseButton>
       </header>
       <ul>
         {user?.cart.map((c) => {
