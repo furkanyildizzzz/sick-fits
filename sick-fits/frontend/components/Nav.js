@@ -3,6 +3,7 @@ import NavStyles from './styles/NavStyles';
 import useUser from '../lib/useUser';
 import SignOut from './SignOut';
 import { useCart } from '../lib/CartState';
+import CartCount from './CartCount';
 
 const Nav = () => {
   const user = useUser();
@@ -17,7 +18,14 @@ const Nav = () => {
           <Link href="/orders">Orders</Link>
           <Link href="/account">Account</Link>
           <SignOut />
-          <button onClick={toggleCartOpen}>My Cart</button>
+          <button onClick={toggleCartOpen}>
+            My Cart
+            <CartCount
+              count={user.cart.reduce((acc, cartItem) => {
+                return acc + cartItem.quantity;
+              }, 0)}
+            />
+          </button>
         </>
       )}
       {!user && (
