@@ -5,6 +5,7 @@ import PriceTagStyles from './styles/PriceTag';
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
 import DeleteProduct from './DeleteProduct';
+import AddToCart from './AddToCart';
 const Product = ({ product }) => {
   return (
     <ItemStyles>
@@ -20,6 +21,7 @@ const Product = ({ product }) => {
       {/*TODO Add buttons to delete and add items*/}
       <div className="buttonList">
         <Link href={{ pathname: '/update', query: { id: product.id } }}>Edit</Link>
+        <AddToCart productId={product.id} />
         <DeleteProduct id={product.id}>Delete</DeleteProduct>
       </div>
     </ItemStyles>

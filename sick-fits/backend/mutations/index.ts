@@ -30,7 +30,7 @@ const graphql = String.raw;
 export const extendGraphqlSchema = graphQLSchemaExtension({
     typeDefs: graphql`
     type Mutation{
-    addToCart(productId : String!) : CartItem
+    addToCart(productId : ID!) : CartItem
     }
     `,
     resolvers: {

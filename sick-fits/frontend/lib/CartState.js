@@ -23,7 +23,6 @@ const CartStateProvider = ({ children }) => {
 
 const useCart = () => {
   const all = useContext(LocalStateContext);
-  console.log({ all });
   return all;
 };
 
