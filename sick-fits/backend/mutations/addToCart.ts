@@ -17,22 +17,20 @@ const addToCart = async (root: any, { productId }: { productId: String }, contex
 
     const [cartItem] = allCartItems;
     if (cartItem) {
-        cartItem.quantity =
-            await context.lists.CartItem.updateOne({
-                id: cartItem.id,
-                data: { quantity: cartItem.quantity + 1 }
-            })
-        return cartItem;
+        return await context.lists.CartItem.updateOne({
+            id: cartItem.id,
+            data: { quantity: cartItem.quantity + 1 },
+            resolveFields: 'id,quantity'
+        })
     }
 
-    const newCartItem = await context.lists.CartItem.createOne({
+    return await context.lists.CartItem.createOne({
         data: {
             user: { connect: { id: sesh.itemId } },
             product: { connect: { id: productId } }
         },
         resolveFields: 'id,quantity'
     })
-    return newCartItem;
 }
 
 export default addToCart;
