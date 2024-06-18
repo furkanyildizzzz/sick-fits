@@ -1,4 +1,4 @@
-import { config, createSchema } from '@keystone-next/keystone/schema';
+import { config, createSchema, graphQLSchemaExtension } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
 import { createAuth } from '@keystone-next/auth';
 import {
@@ -12,6 +12,7 @@ import { ProductImage } from './schemas/ProductImage';
 import { insertSeedData } from './seed-data';
 import sendPasswordResetEmail from './lib/mail';
 import { CartItem } from './schemas/CartItem';
+import { extendGraphqlSchema } from './mutations/';
 
 const databaseUrl =
     process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -71,7 +72,8 @@ export default withAuth(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             isAccessAllowed: ({ session }) => !!session?.data,
         },
-
+        extendGraphqlSchema,
+        //extendGraphqlSchema: (schema) => addCompatibilityForQueries(extendGraphqlSchema(schema)),
         session: withItemData(statelessSessions(sessionConfig), {
             // GraphQL Query
             User: 'id name email',
