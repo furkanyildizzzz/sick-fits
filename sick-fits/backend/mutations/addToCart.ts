@@ -15,18 +15,13 @@ const addToCart = async (root: any, { productId }: { productId: String }, contex
         resolveFields: 'id,quantity'
     })
 
-    console.log({ sesh })
-    console.log({ productId })
-    console.log({ allCartItems })
     const [cartItem] = allCartItems;
-    console.log({ cartItem })
     if (cartItem) {
-        cartItem.quantity = cartItem.quantity + 1
-        console.log({ cartItem })
-        await context.lists.CartItem.updateOne({
-            id: cartItem.id,
-            data: { quantity: cartItem.quantity }
-        })
+        cartItem.quantity =
+            await context.lists.CartItem.updateOne({
+                id: cartItem.id,
+                data: { quantity: cartItem.quantity + 1 }
+            })
         return cartItem;
     }
 
