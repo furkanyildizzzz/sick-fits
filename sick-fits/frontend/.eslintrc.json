@@ -22,6 +22,7 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "no-unused-vars":"warn",
+        "no-process-env":"off",
         "prettier/prettier": [
             "error",
             {
