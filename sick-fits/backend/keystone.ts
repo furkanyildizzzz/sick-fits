@@ -13,6 +13,8 @@ import { insertSeedData } from './seed-data';
 import sendPasswordResetEmail from './lib/mail';
 import { CartItem } from './schemas/CartItem';
 import { extendGraphqlSchema } from './mutations/';
+import Order from './schemas/Order';
+import OrderItem from './schemas/OrderItem';
 
 const databaseUrl =
     process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -65,7 +67,9 @@ export default withAuth(
             User,
             Product,
             ProductImage,
-            CartItem
+            CartItem,
+            Order,
+            OrderItem
         }),
         ui: {
             // TODO change this for roles
