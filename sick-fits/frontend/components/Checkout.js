@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import SickButton from './styles/SickButton';
 import { useState } from 'react';
 import nProgress from 'nprogress';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -14,12 +16,28 @@ const CheckoutFormStyles = styled.form`
   grid-gap: 1rem;
 `;
 
+const CHECKOUT_MUTATION = gql`
+  mutation CHECKOUT_MUTATION($token: String!) {
+    checkout(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        name
+      }
+    }
+  }
+`;
+
 // eslint-disable-next-line no-undef
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+
+  const [checkout, { data, loading: checkoutLoading, error: checkoutError }] = useMutation(CHECKOUT_MUTATION);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -40,10 +58,22 @@ const CheckoutForm = () => {
     // handle any errors from stripe
     if (error) {
       setError(error);
+      setLoading(false);
+      nProgress.done();
+      return false;
     }
     console.log({ paymentMethod });
 
     // send the token to our keystone server via custom mutation
+    await checkout({ variables: { token: paymentMethod.id } });
+
+    if (checkoutError) {
+      setError(checkoutError);
+      setLoading(false);
+      nProgress.done();
+      return false;
+    }
+
     // change the page view to the order
     // close the cart
 

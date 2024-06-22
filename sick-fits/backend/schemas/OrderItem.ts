@@ -9,7 +9,15 @@ const OrderItem = list({
                 displayMode: 'textarea'
             }
         }),
-        photo: relationship({ ref: 'ProductImage' }),
+        photo: relationship({
+            ref: 'ProductImage',
+            ui: {
+                displayMode: 'cards',
+                cardFields: ['image', 'altText'],
+                inlineCreate: { fields: ['image', 'altText'] },
+                inlineEdit: { fields: ['image', 'altText'] }
+            }
+        }),
         price: integer(),
         quantity: integer(),
         order: relationship({ ref: 'Order.items' })
