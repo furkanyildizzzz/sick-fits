@@ -15,6 +15,7 @@ import { CartItem } from './schemas/CartItem';
 import { extendGraphqlSchema } from './mutations/';
 import Order from './schemas/Order';
 import OrderItem from './schemas/OrderItem';
+import Role from './schemas/Role';
 
 const databaseUrl =
     process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -69,7 +70,8 @@ export default withAuth(
             ProductImage,
             CartItem,
             Order,
-            OrderItem
+            OrderItem,
+            Role
         }),
         ui: {
             // TODO change this for roles
