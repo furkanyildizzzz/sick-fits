@@ -4,7 +4,7 @@ import DisplayError from './ErrorMessage';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-const ProdcutStyles = styled.div`
+const ProductStyles = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
@@ -44,7 +44,7 @@ const SingleProduct = ({ id }) => {
   if (error) return <DisplayError error={error} />;
 
   return (
-    <ProdcutStyles>
+    <ProductStyles>
       <Head>
         <title>Sick Fits | {data.Product.name}</title>
       </Head>
@@ -56,7 +56,7 @@ const SingleProduct = ({ id }) => {
         <h2>{data.Product.name}</h2>
         <p> {data.Product.description} </p>
       </div>
-    </ProdcutStyles>
+    </ProductStyles>
   );
 };
 
